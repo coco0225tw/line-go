@@ -1,8 +1,9 @@
 'use client';
 import { useRef } from 'react';
 import { FormWrapper } from './style';
+import { Button, ButtonTheme1 } from './../button/index';
 
-export default function Home() {
+export default function Form() {
   const airportInput = '桃園國際機場 第一航廈';
   const airlineIdRef = useRef<HTMLDivElement>(null);
   const nameRef = useRef<HTMLDivElement>(null);
@@ -46,7 +47,7 @@ export default function Home() {
       <div contentEditable className="input" id="id" />
       <div className="form_item">乘車備註</div>
       <div className={`input ${formError.id && 'error'}`} contentEditable id="remark" />
-      <div className="button">下一步</div>
+      <Button theme={ButtonTheme1.Dark} message="下一步" submitFun={() => {}} />
     </FormWrapper>
   );
 }

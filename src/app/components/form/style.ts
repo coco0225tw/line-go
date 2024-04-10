@@ -10,7 +10,6 @@ export const FormWrapper = styled.div`
   flex-direction: column;
   max-width: 720px;
   padding: 20px;
-  color: #4b5c6b;
   .title {
     align-self: center;
     font-size: 24px;
@@ -47,14 +46,6 @@ export const FormWrapper = styled.div`
     //outline-color: red; //todo
   }
 
-  .button {
-    height: 40px;
-    background-color: #4b5c6b;
-    color: #fff;
-    font-size: 20px;
-    text-align: center;
-    line-height: 40px;
-  }
   #airport {
     background-color: #f8f9fa;
     color: #c2cfd9;

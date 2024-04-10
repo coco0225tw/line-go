@@ -1,12 +1,13 @@
 'use client';
 import { HomeWrapper } from './style';
 import PopUp from './components/popUp/index';
-import { FormWrapper } from './components/form/style';
+import Form from './components/form';
 
 export default function Home() {
   return (
     <HomeWrapper>
-      <FormWrapper />
+      {/* <PopUp /> */} //todo
+      <Form />
     </HomeWrapper>
   );
 }
