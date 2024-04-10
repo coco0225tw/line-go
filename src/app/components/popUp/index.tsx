@@ -26,10 +26,8 @@ function ErrorPopup() {
     <ErrorPopUpWrapper>
       <div className="title">{`查不到「${airline}」的航班資訊`}</div>
       <div className="message">請確認航班資訊、起飛時間等，你也可以填寫此航班作為機場接送資訊。</div>
-      {/* <div className="button_wrapper"> */}
       <Button theme={ButtonTheme1.Dark} message="確認航班資訊，並送出" submitFun={() => {}} />
       <Button theme={ButtonTheme1.Light} message="重新填寫" submitFun={() => {}} />
-      {/* </div> */}
     </ErrorPopUpWrapper>
   );
 }
