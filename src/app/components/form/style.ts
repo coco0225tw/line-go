@@ -42,10 +42,6 @@ export const FormWrapper = styled.div`
     padding-left: 12px;
   }
   .input:focus,
-  #remark:focus {
-    //outline-color: red; //todo
-  }
-
   #airport {
     background-color: #f8f9fa;
     color: #c2cfd9;

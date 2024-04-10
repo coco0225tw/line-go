@@ -1,5 +1,5 @@
 'use client';
-import { useRef } from 'react';
+import { useRef, useState, RefObject } from 'react';
 import { FormWrapper } from './style';
 import { Button, ButtonTheme1 } from './../button/index';
 
@@ -9,16 +9,47 @@ export default function Form() {
   const nameRef = useRef<HTMLDivElement>(null);
   const phoneNumberRef = useRef<HTMLDivElement>(null);
   const idRef = useRef<HTMLDivElement>(null);
-  // const formRefs = { airlineIdRef, nameRef, phoneNumberRef, idRef };
+  const [formError, setFormError] = useState({
+    airlineId: false,
+    name: false,
+    phoneNumber: false,
+    id: false,
+  });
+  const airlineIdRegex = new RegExp('[^A-Za-z0-9]+');
+  const nameRegex = new RegExp('[^A-Za-z ]+');
+  const phoneNumberRegex = new RegExp('[0-9]+');
+  const idRegex = new RegExp('[^A-Z0-9]+');
 
-  // const submit = () => {
-
-  // };
-  const formError = {
-    airlineId: true,
-    name: true,
-    phoneNumber: true,
-    id: true,
+  const submit = () => {
+    //todo callApi
+  };
+  const action = () => {
+    if (checkForm()) {
+      submit();
+    } else {
+      //todo show error popup
+    }
+  };
+  const checkForm = () => {
+    const checkAirlineId = airlineIdRegex.test(modifyTypeToString(airlineIdRef));
+    const checkName = nameRegex.test(modifyTypeToString(nameRef));
+    const checkPhoneNumber = phoneNumberRegex.test(modifyTypeToString(phoneNumberRef));
+    const checkId = idRegex.test(modifyTypeToString(idRef));
+    setFormError({
+      ...formError,
+      airlineId: checkAirlineId,
+      name: checkName,
+      phoneNumber: checkPhoneNumber,
+      id: checkId,
+    });
+    if (!checkAirlineId || !checkName || !checkPhoneNumber || !checkId) {
+      return false;
+    }
+    return true;
+  };
+  const modifyTypeToString = (inputRef: RefObject<HTMLDivElement>) => {
+    const inputValue = inputRef?.current?.textContent;
+    return inputValue ? inputValue : '';
   };
 
   return (
@@ -47,7 +78,7 @@ export default function Form() {
       <div contentEditable className="input" id="id" />
       <div className="form_item">乘車備註</div>
       <div className={`input ${formError.id && 'error'}`} contentEditable id="remark" />
-      <Button theme={ButtonTheme1.Dark} message="下一步" submitFun={() => {}} />
+      <Button theme={ButtonTheme1.Dark} message="下一步" submitFun={action} />
     </FormWrapper>
   );
 }
