@@ -14,4 +14,5 @@ export default function Home() {
   //todo store
   //todo custom hook
   //todo rwd
+  //todo input extract
 }
