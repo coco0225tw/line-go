@@ -10,9 +10,9 @@ export default function Home() {
       <Form />
     </HomeWrapper>
   );
-  //todo api (env/ mock)
+  //todo api (env)
   //todo store
   //todo custom hook
   //todo rwd
-  //todo input extract
+  //todo input extract style
 }

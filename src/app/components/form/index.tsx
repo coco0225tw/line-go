@@ -2,8 +2,10 @@
 import { useRef, useState, RefObject } from 'react';
 import { FormWrapper } from './style';
 import { Button, ButtonTheme1 } from './../button/index';
+import { useSearchPlane } from '@/app/lib/searchPlane/hook';
 
 export default function Form() {
+  const { searchPlane } = useSearchPlane();
   const airportInput = '桃園國際機場 第一航廈';
   const airlineIdRef = useRef<HTMLDivElement>(null);
   const nameRef = useRef<HTMLDivElement>(null);
@@ -20,14 +22,9 @@ export default function Form() {
   const phoneNumberRegex = new RegExp('^[\\d]+$');
   const idRegex = new RegExp('^[A-Z\\d]+$');
 
-  const submit = () => {
-    //todo callApi
-  };
   const action = () => {
     if (checkForm()) {
-      submit();
-    } else {
-      //todo show error popup
+      searchPlane();
     }
   };
   const checkForm = () => {
