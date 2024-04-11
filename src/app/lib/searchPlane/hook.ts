@@ -1,7 +1,15 @@
 import { useSearchPlaneStore } from './store';
 import { searchPlaneRepo } from '@/app/repoUtility';
+import { useUserStore } from '../user/store';
+import { PlaneResponse } from './interface';
+import { usePopUpStore } from '../popUp/store';
+import { PopUpType } from '@/app/enum';
+
 export const useSearchPlane = () => {
-  const { isSearchWaiting, setIsSearchWaiting, lastModifiedTime, setSearchPlanes, setLastModifiedTime } =
+  const { userPlane } = useUserStore();
+  const { showPopUp } = usePopUpStore();
+
+  const { isSearchWaiting, setIsSearchWaiting, lastModifiedTime, setSearchPlanes, setLastModifiedTime, searchPlanes } =
     useSearchPlaneStore();
 
   const searchPlane = () => {
@@ -16,6 +24,13 @@ export const useSearchPlane = () => {
     return prevDate === nowDate;
   };
 
+  const findPlaneAndShowPopup = (planeData: PlaneResponse[]) => {
+    const isUserPlaneExist =
+      -1 !== planeData.findIndex((plane: PlaneResponse) => plane.AirlineID + plane.FlightNumber === userPlane);
+    if (isUserPlaneExist) showPopUp(PopUpType.SUCCESS);
+    showPopUp(PopUpType.ERROR);
+  };
+
   const searchPlaneHandler = () => {
     searchPlaneRepo
       .searchPlane()
@@ -26,7 +41,9 @@ export const useSearchPlane = () => {
         if (!isSameDate) {
           setSearchPlanes(searchPlaneResponse);
           setLastModifiedTime(modifiedTime);
-          console.log('update');
+          findPlaneAndShowPopup(searchPlaneResponse);
+        } else {
+          findPlaneAndShowPopup(searchPlanes);
         }
       })
       .catch((err) => {

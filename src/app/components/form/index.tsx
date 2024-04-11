@@ -3,9 +3,11 @@ import { useRef, useState, RefObject } from 'react';
 import { FormWrapper } from './style';
 import { Button, ButtonTheme1 } from './../button/index';
 import { useSearchPlane } from '@/app/lib/searchPlane/hook';
+import { useUserStore } from '@/app/lib/user/store';
 
 export default function Form() {
   const { searchPlane } = useSearchPlane();
+  const { setUserPlane } = useUserStore();
   const airportInput = '桃園國際機場 第一航廈';
   const airlineIdRef = useRef<HTMLDivElement>(null);
   const nameRef = useRef<HTMLDivElement>(null);
@@ -40,10 +42,12 @@ export default function Form() {
       phoneNumber: checkPhoneNumber,
       id: checkId,
     });
-    if (!checkAirlineId || !checkName || !checkPhoneNumber || !checkId) {
-      return false;
+
+    if (checkAirlineId && checkName && checkPhoneNumber && checkId) {
+      setUserPlane(airlineIdRef?.current?.textContent as string);
+      return true;
     }
-    return true;
+    return false;
   };
 
   const checkValue = (inputRef: RefObject<HTMLDivElement>, regex: RegExp) => {
