@@ -26,6 +26,10 @@ export const FormWrapper = styled.div`
     height: 56px;
     margin-bottom: 20px;
     line-height: 56px;
+    overflow: scroll;
+    white-space: nowrap;
+    flex-basis: 56px;
+    flex-shrink: 0;
     &.error {
       outline-color: #d3455b;
     }
@@ -33,6 +37,11 @@ export const FormWrapper = styled.div`
   #remark {
     flex-grow: 1;
     margin-bottom: 20px;
+    /* word-break: break-all;
+    white-space: pre-line; */
+    display: inline-block;
+    overflow: scroll;
+    min-height: 0;
   }
   .input,
   #remark {

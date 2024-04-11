@@ -16,7 +16,7 @@ export default function Form() {
     id: true,
   });
   const airlineIdRegex = new RegExp('^[A-Za-z\\d]+$');
-  const nameRegex = new RegExp('^[A-Za-z\\s]+[A-Za-z]+[A-Za-z\\s]$');
+  const nameRegex = new RegExp('^[a-zA-Z\\s]*[a-zA-Z]+[a-zA-Z\\s]*$');
   const phoneNumberRegex = new RegExp('^[\\d]+$');
   const idRegex = new RegExp('^[A-Z\\d]+$');
 
@@ -59,6 +59,12 @@ export default function Form() {
     return false;
   };
 
+  const preventNextLine = (event: React.KeyboardEvent<HTMLDivElement>) => {
+    if (event.key === 'Enter') {
+      event.preventDefault();
+    }
+  };
+
   return (
     <FormWrapper>
       <div className="title">送機行程</div>
@@ -73,19 +79,33 @@ export default function Form() {
         contentEditable
         ref={airlineIdRef}
         id="airlineId"
+        onKeyDown={(e) => preventNextLine(e)}
       />
       <div className="subTitle">旅客資訊</div>
       <div className="form_item">姓名</div>
-      <div className={`input ${!formValidate.name && 'error'}`} contentEditable ref={nameRef} id="name" />
+      <div
+        className={`input ${!formValidate.name && 'error'}`}
+        contentEditable
+        ref={nameRef}
+        id="name"
+        onKeyDown={(e) => preventNextLine(e)}
+      />
       <div className="form_item">電話</div>
       <div
         className={`input ${!formValidate.phoneNumber && 'error'}`}
         contentEditable
         ref={phoneNumberRef}
         id="phoneNumber"
+        onKeyDown={(e) => preventNextLine(e)}
       />
       <div className="form_item">身分證字號/護照編號</div>
-      <div contentEditable ref={idRef} className={`input ${!formValidate.id && 'error'}`} id="id" />
+      <div
+        contentEditable
+        ref={idRef}
+        className={`input ${!formValidate.id && 'error'}`}
+        id="id"
+        onKeyDown={(e) => preventNextLine(e)}
+      />
       <div className="form_item">乘車備註</div>
       <div contentEditable id="remark" />
       <Button theme={ButtonTheme1.Dark} message="下一步" submitFun={action} />
