@@ -13,6 +13,7 @@ export default function Form() {
   const nameRef = useRef<HTMLDivElement>(null);
   const phoneNumberRef = useRef<HTMLDivElement>(null);
   const idRef = useRef<HTMLDivElement>(null);
+
   const [formValidate, setFormValidate] = useState({
     airlineId: true,
     name: true,
@@ -26,7 +27,8 @@ export default function Form() {
 
   const action = () => {
     if (checkForm()) {
-      searchPlane();
+      const userAirline = airlineIdRef?.current?.textContent;
+      searchPlane(userAirline as string);
     }
   };
   const checkForm = () => {
@@ -43,8 +45,10 @@ export default function Form() {
       id: checkId,
     });
 
-    if (checkAirlineId && checkName && checkPhoneNumber && checkId) {
-      setUserPlane(airlineIdRef?.current?.textContent as string);
+    const allValidated = checkAirlineId && checkName && checkPhoneNumber && checkId;
+    if (allValidated) {
+      const userAirline = airlineIdRef?.current?.textContent;
+      setUserPlane(userAirline as string);
       return true;
     }
     return false;

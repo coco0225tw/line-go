@@ -3,15 +3,16 @@ import { Button, ButtonTheme1 } from '../button';
 import Image from 'next/image';
 import checkImg from './../../../../public/check-circle.svg';
 import { usePopUpStore } from '@/app/lib/popUp/store';
-import { PopUpType } from '@/app/enum';
+import { ShowPopUpType } from '@/app/enum';
 import { useUserStore } from '@/app/lib/user/store';
 
 export default function PopUp() {
   const { popUpType, isVisible } = usePopUpStore();
+  const isErrorPopUpVisible = popUpType === ShowPopUpType.ERROR;
+  const isSuccessPopUpVisible = popUpType === ShowPopUpType.SUCCESS;
   return (
-    <PopUpWrapper $isVisible={isVisible}>
-      {popUpType === PopUpType.SUCCESS && <SuccessPopup />}
-      {popUpType === PopUpType.ERROR && <ErrorPopup />}
+    <PopUpWrapper $isVisible={isVisible()}>
+      {isSuccessPopUpVisible ? <SuccessPopup /> : isErrorPopUpVisible && <ErrorPopup />}
     </PopUpWrapper>
   );
 }
@@ -36,7 +37,7 @@ function ErrorPopup() {
         theme={ButtonTheme1.Dark}
         message="確認航班資訊，並送出"
         submitFun={() => {
-          showPopUp(PopUpType.SUCCESS);
+          showPopUp(ShowPopUpType.SUCCESS);
         }}
       />
       <Button theme={ButtonTheme1.Light} message="重新填寫" submitFun={closePopUp} />

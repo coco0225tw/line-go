@@ -1,4 +1,9 @@
-export enum PopUpType {
+export enum ShowPopUpType {
   SUCCESS = 'SUCCESS',
   ERROR = 'ERROR',
+  NONE = 'NONE',
 }
+export enum ClosePopUpType {
+  NONE = 'NONE',
+}
+export type PopUpType = ShowPopUpType | ClosePopUpType;

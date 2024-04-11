@@ -1,21 +1,19 @@
 import { useSearchPlaneStore } from './store';
 import { searchPlaneRepo } from '@/app/repoUtility';
-import { useUserStore } from '../user/store';
 import { PlaneResponse } from './interface';
 import { usePopUpStore } from '../popUp/store';
-import { PopUpType } from '@/app/enum';
+import { ShowPopUpType } from '@/app/enum';
 
 export const useSearchPlane = () => {
-  const { userPlane } = useUserStore();
   const { showPopUp } = usePopUpStore();
 
   const { isSearchWaiting, setIsSearchWaiting, lastModifiedTime, setSearchPlanes, setLastModifiedTime, searchPlanes } =
     useSearchPlaneStore();
 
-  const searchPlane = () => {
+  const searchPlane = (userAirline: string) => {
     if (isSearchWaiting) return;
     setIsSearchWaiting(true);
-    searchPlaneHandler();
+    searchPlaneHandler(userAirline);
   };
 
   const compareDates = (prev: Date, now: Date) => {
@@ -24,16 +22,16 @@ export const useSearchPlane = () => {
     return prevDate === nowDate;
   };
 
-  const findPlaneAndShowPopup = (planeData: PlaneResponse[]) => {
+  const findPlaneAndShowPopup = (planeData: PlaneResponse[], userAirline: string) => {
     const isUserPlaneExist =
-      planeData.findIndex((plane: PlaneResponse) => plane.AirlineID + plane.FlightNumber === userPlane) >= 0;
-    if (isUserPlaneExist) showPopUp(PopUpType.SUCCESS);
+      planeData.findIndex((plane: PlaneResponse) => plane.AirlineID + plane.FlightNumber === userAirline) >= 0;
+    if (isUserPlaneExist) showPopUp(ShowPopUpType.SUCCESS);
     else {
-      showPopUp(PopUpType.ERROR);
+      showPopUp(ShowPopUpType.ERROR);
     }
   };
 
-  const searchPlaneHandler = () => {
+  const searchPlaneHandler = (userAirline: string) => {
     searchPlaneRepo
       .searchPlane()
       .then((data) => {
@@ -41,11 +39,11 @@ export const useSearchPlane = () => {
         const { searchPlaneResponse, modifiedTime } = data;
         const isSameDate = compareDates(lastModifiedTime, modifiedTime);
         if (!isSameDate) {
+          findPlaneAndShowPopup(searchPlaneResponse, userAirline);
           setSearchPlanes(searchPlaneResponse);
           setLastModifiedTime(modifiedTime);
-          findPlaneAndShowPopup(searchPlaneResponse);
         } else {
-          findPlaneAndShowPopup(searchPlanes);
+          findPlaneAndShowPopup(searchPlanes, userAirline);
         }
       })
       .catch((err) => {
