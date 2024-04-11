@@ -3,6 +3,6 @@ import { PopUpType } from '@/app/enum';
 export interface PopUpState {
   popUpType: PopUpType;
   isVisible: boolean;
-  showPopUp: (popUpType: PopUpType) => void;
+  showPopUp: (payload: PopUpType) => void;
   closePopUp: () => void;
 }
