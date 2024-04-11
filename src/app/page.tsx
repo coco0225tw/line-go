@@ -6,8 +6,8 @@ import Form from './components/form';
 export default function Home() {
   return (
     <HomeWrapper>
-      {/* <PopUp /> //todo*/}
       <Form />
+      <PopUp />
     </HomeWrapper>
   );
   //todo api (env)

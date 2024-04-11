@@ -26,9 +26,11 @@ export const useSearchPlane = () => {
 
   const findPlaneAndShowPopup = (planeData: PlaneResponse[]) => {
     const isUserPlaneExist =
-      -1 !== planeData.findIndex((plane: PlaneResponse) => plane.AirlineID + plane.FlightNumber === userPlane);
+      planeData.findIndex((plane: PlaneResponse) => plane.AirlineID + plane.FlightNumber === userPlane) >= 0;
     if (isUserPlaneExist) showPopUp(PopUpType.SUCCESS);
-    showPopUp(PopUpType.ERROR);
+    else {
+      showPopUp(PopUpType.ERROR);
+    }
   };
 
   const searchPlaneHandler = () => {

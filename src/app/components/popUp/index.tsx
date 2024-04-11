@@ -2,11 +2,16 @@ import { PopUpWrapper, SuccessPopUpWrapper, ErrorPopUpWrapper } from './style';
 import { Button, ButtonTheme1 } from '../button';
 import Image from 'next/image';
 import checkImg from './../../../../public/check-circle.svg';
+import { usePopUpStore } from '@/app/lib/popUp/store';
+import { PopUpType } from '@/app/enum';
+import { useUserStore } from '@/app/lib/user/store';
+
 export default function PopUp() {
+  const { popUpType, isVisible } = usePopUpStore();
   return (
-    <PopUpWrapper>
-      <SuccessPopup />
-      <ErrorPopup />
+    <PopUpWrapper $isVisible={isVisible}>
+      {popUpType === PopUpType.SUCCESS && <SuccessPopup />}
+      {popUpType === PopUpType.ERROR && <ErrorPopup />}
     </PopUpWrapper>
   );
 }
@@ -21,13 +26,20 @@ function SuccessPopup() {
 }
 
 function ErrorPopup() {
-  const airline = '123';
+  const { closePopUp, showPopUp } = usePopUpStore();
+  const { userPlane } = useUserStore();
   return (
     <ErrorPopUpWrapper>
-      <div className="title">{`查不到「${airline}」的航班資訊`}</div>
+      <div className="title">{`查不到「${userPlane}」的航班資訊`}</div>
       <div className="message">請確認航班資訊、起飛時間等，你也可以填寫此航班作為機場接送資訊。</div>
-      <Button theme={ButtonTheme1.Dark} message="確認航班資訊，並送出" submitFun={() => {}} />
-      <Button theme={ButtonTheme1.Light} message="重新填寫" submitFun={() => {}} />
+      <Button
+        theme={ButtonTheme1.Dark}
+        message="確認航班資訊，並送出"
+        submitFun={() => {
+          showPopUp(PopUpType.SUCCESS);
+        }}
+      />
+      <Button theme={ButtonTheme1.Light} message="重新填寫" submitFun={closePopUp} />
     </ErrorPopUpWrapper>
   );
 }

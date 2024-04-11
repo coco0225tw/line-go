@@ -1,11 +1,14 @@
 import styled from 'styled-components';
-export const PopUpWrapper = styled.div`
+interface PopUpWrapperProps {
+  $isVisible: boolean;
+}
+export const PopUpWrapper = styled.div<PopUpWrapperProps>`
   width: 100%;
   height: 100%;
   background-color: rgba(0, 0, 0, 0.6);
   top: 0;
   position: relative;
-  z-index: 1;
+  display: ${(props) => (props.$isVisible ? 'block' : 'none')};
 `;
 
 const ContentWrapper = styled.div`
