@@ -1,4 +1,3 @@
-'use client'; //todo remove
 import React, { ReactNode, useRef } from 'react';
 import { FormWrapper, Title, SubTitle, Input } from './style';
 import { Button } from './../button/index';
