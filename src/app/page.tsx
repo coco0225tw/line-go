@@ -10,6 +10,4 @@ export default function Home() {
       <PopUp />
     </HomeWrapper>
   );
-  //todo input extract style
-  //todo rwd
 }
