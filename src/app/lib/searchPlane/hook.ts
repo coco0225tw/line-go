@@ -30,9 +30,8 @@ export const useSearchPlane = () => {
   };
 
   const searchPlaneHandler = (userAirline: string) => {
-    const token = '123'; //todo
     searchPlaneRepo
-      .searchPlane(token, lastModifiedTime)
+      .searchPlane(lastModifiedTime)
       .then((data) => {
         setIsSearchWaiting(false);
         const { searchPlaneResponse, modifiedTime } = data;

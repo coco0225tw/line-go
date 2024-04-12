@@ -7,7 +7,7 @@ export const SearchPlaneRepository = (mockData: Promise<SearchPlaneData>): Searc
 };
 
 class SearchPlaneApiUtility implements ISearchPlaneApiUtility {
-  async searchPlane(token: string, lastModified: string): Promise<SearchPlaneData> {
+  async searchPlane(lastModified: string): Promise<SearchPlaneData> {
     const res = await fetch(
       'https://tdx.transportdata.tw/api/basic/v2/Air/FIDS/Airport/Departure/TPE?$orderby=ScheduleDepartureTime&$format=JSON',
       {
@@ -39,12 +39,12 @@ class MockSearchPlaneApiUtility implements ISearchPlaneApiUtility {
   constructor(mockData: Promise<SearchPlaneData>) {
     this.mockData = mockData;
   }
-  async searchPlane(token: string, lastModified: string): Promise<SearchPlaneData> {
+  async searchPlane(lastModified: string): Promise<SearchPlaneData> {
     await delay(2500);
     return this.mockData;
   }
 }
 
 interface ISearchPlaneApiUtility {
-  searchPlane: (token: string, lastModified: string) => Promise<SearchPlaneData>;
+  searchPlane: (lastModified: string) => Promise<SearchPlaneData>;
 }
