@@ -1,4 +1,4 @@
-import { PopUpType, ShowPopUpType } from '@/app/enum';
+import { PopUpType, ShowPopUpType } from '@/app/utils/enum';
 
 export interface PopUpState {
   popUpType: PopUpType;

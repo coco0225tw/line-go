@@ -5,7 +5,7 @@ import { Button } from './../button/index';
 import { useSearchPlane } from '@/app/lib/searchPlane/hook';
 import { useUserStore } from '@/app/lib/user/store';
 import { FormValidateState } from '@/app/lib/form/interface';
-import { ButtonTheme } from '@/app/enum';
+import { ButtonTheme } from '@/app/utils/enum';
 
 export default function Form() {
   const { searchPlane } = useSearchPlane();

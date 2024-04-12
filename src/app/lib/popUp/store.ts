@@ -1,4 +1,4 @@
-import { ClosePopUpType } from '@/app/enum';
+import { ClosePopUpType } from '@/app/utils/enum';
 import { create } from 'zustand';
 import { PopUpState } from './interface';
 

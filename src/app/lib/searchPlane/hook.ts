@@ -1,8 +1,8 @@
 import { useSearchPlaneStore } from './store';
-import { searchPlaneRepo } from '@/app/repoUtility';
+import { searchPlaneRepo } from '@/app/utils/repoUtility';
 import { PlaneResponse } from './interface';
 import { usePopUpStore } from '../popUp/store';
-import { ShowPopUpType } from '@/app/enum';
+import { ShowPopUpType } from '@/app/utils/enum';
 
 export const useSearchPlane = () => {
   const { showPopUp } = usePopUpStore();

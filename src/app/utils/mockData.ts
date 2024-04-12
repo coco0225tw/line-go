@@ -1,4 +1,4 @@
-import { SearchPlaneData } from './lib/searchPlane/interface';
+import { SearchPlaneData } from '../lib/searchPlane/interface';
 export const searchPlaneMock = new Promise<SearchPlaneData>((resolve) => {
   resolve({
     searchPlaneResponse: [

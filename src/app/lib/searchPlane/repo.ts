@@ -1,4 +1,4 @@
-import { delay } from '@/app/utils';
+import { delay } from '@/app/utils/utils';
 import { SearchPlaneData, PlaneResponse } from './interface';
 export const SearchPlaneRepository = (mockData: Promise<SearchPlaneData>): SearchPlaneApiUtility => {
   const apiUtil =
