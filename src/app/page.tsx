@@ -10,7 +10,6 @@ export default function Home() {
       <PopUp />
     </HomeWrapper>
   );
-  //todo store
-  //todo custom hook
   //todo input extract style
+  //todo rwd
 }
