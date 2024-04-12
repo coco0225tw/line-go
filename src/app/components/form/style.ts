@@ -17,9 +17,9 @@ export const FormWrapper = styled.div`
   #remark {
     flex-grow: 1;
     margin-bottom: 20px;
-    display: inline-block;
-    overflow: scroll;
     min-height: 0;
+    white-space: wrap;
+    -webkit-appearance: textarea;
   }
   .input,
   #remark {
@@ -33,6 +33,11 @@ export const FormWrapper = styled.div`
     background-color: #f8f9fa;
     color: #c2cfd9;
   }
+  /* #remark {
+    overflow-y: scroll;
+    overflow-x: hidden;
+    display: inline-block;
+  } */
 `;
 
 export const SubFormWrapper = styled.div`
@@ -52,7 +57,8 @@ export const Input = styled.div`
   height: 56px;
   margin-bottom: 20px;
   line-height: 56px;
-  overflow: scroll;
+  overflow-x: scroll;
+  overflow-y: hidden;
   white-space: nowrap;
   flex-basis: 56px;
   flex-shrink: 0;
