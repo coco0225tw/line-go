@@ -1,8 +1,8 @@
 import { ButtonWrapper } from './style';
 import { ButtonTheme } from '@/app/utils/enum';
-export function Button({ message, submitFun, theme }: { message: string; submitFun: () => void; theme: ButtonTheme }) {
+export function Button({ message, action, theme }: { message: string; action: () => void; theme: ButtonTheme }) {
   return (
-    <ButtonWrapper theme={theme} onClick={submitFun}>
+    <ButtonWrapper theme={theme} onClick={action}>
       {message}
     </ButtonWrapper>
   );

@@ -36,11 +36,11 @@ function ErrorPopup() {
       <Button
         theme={ButtonTheme.Dark}
         message="確認航班資訊，並送出"
-        submitFun={() => {
+        action={() => {
           showPopUp(ShowPopUpType.SUCCESS);
         }}
       />
-      <Button theme={ButtonTheme.Light} message="重新填寫" submitFun={closePopUp} />
+      <Button theme={ButtonTheme.Light} message="重新填寫" action={closePopUp} />
     </ErrorPopUpWrapper>
   );
 }

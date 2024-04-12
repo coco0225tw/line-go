@@ -123,7 +123,7 @@ export default function Form() {
         <SubTitle>乘車備註</SubTitle>
         <InputBox props={remarkProps} />
       </SubForm>
-      <Button theme={ButtonTheme.Dark} message="下一步" submitFun={action} />
+      <Button theme={ButtonTheme.Dark} message="下一步" action={action} />
     </FormWrapper>
   );
 }
