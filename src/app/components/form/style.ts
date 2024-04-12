@@ -14,31 +14,9 @@ export const FormWrapper = styled.div`
     align-self: center;
     font-size: 24px;
   }
-  .subTitle {
-    font-size: 20px;
-    margin-bottom: 20px;
-  }
-  .form_item {
-    font-weight: bold;
-    margin-bottom: 4px;
-  }
-  .input {
-    height: 56px;
-    margin-bottom: 20px;
-    line-height: 56px;
-    overflow: scroll;
-    white-space: nowrap;
-    flex-basis: 56px;
-    flex-shrink: 0;
-    &.error {
-      outline-color: #d3455b;
-    }
-  }
   #remark {
     flex-grow: 1;
     margin-bottom: 20px;
-    /* word-break: break-all;
-    white-space: pre-line; */
     display: inline-block;
     overflow: scroll;
     min-height: 0;
@@ -54,5 +32,31 @@ export const FormWrapper = styled.div`
   #airport {
     background-color: #f8f9fa;
     color: #c2cfd9;
+  }
+`;
+
+export const SubFormWrapper = styled.div`
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+`;
+export const Title = styled.div`
+  font-size: 20px;
+  margin-bottom: 20px;
+`;
+export const SubTitle = styled.div`
+  font-weight: bold;
+  margin-bottom: 4px;
+`;
+export const Input = styled.div`
+  height: 56px;
+  margin-bottom: 20px;
+  line-height: 56px;
+  overflow: scroll;
+  white-space: nowrap;
+  flex-basis: 56px;
+  flex-shrink: 0;
+  &.error {
+    outline-color: #d3455b;
   }
 `;
