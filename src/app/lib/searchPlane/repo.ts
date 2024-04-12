@@ -14,7 +14,6 @@ class SearchPlaneApiUtility implements ISearchPlaneApiUtility {
         method: 'GET',
         headers: {
           'content-type': 'application/json',
-          //Authorization: token, //todo
           'if-modified-since': lastModified,
         },
       }
