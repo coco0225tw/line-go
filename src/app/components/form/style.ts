@@ -28,16 +28,16 @@ export const FormWrapper = styled.div`
     outline: 2px solid #c2cfd9;
     padding-left: 12px;
   }
-  .input:focus,
+
   #airport {
     background-color: #f8f9fa;
     color: #c2cfd9;
   }
-  /* #remark {
-    overflow-y: scroll;
-    overflow-x: hidden;
-    display: inline-block;
-  } */
+  .input:focus,
+  #remark:focus {
+    color: #555;
+    outline: 2px solid #555;
+  }
 `;
 
 export const SubFormWrapper = styled.div`
