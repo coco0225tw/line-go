@@ -1,4 +1,4 @@
-import { PopUpType } from '@/app/utils/enum';
+import { PopUpType } from '@/utils/enum';
 import { create } from 'zustand';
 import { SearchPlaneState } from './interface';
 

@@ -1,11 +1,10 @@
-'use client';
 import { useRef, useState, RefObject } from 'react';
 import { FormWrapper } from './style';
-import { Button } from './../button/index';
-import { useSearchPlane } from '@/app/lib/searchPlane/hook';
-import { useUserStore } from '@/app/lib/user/store';
-import { FormValidateState } from '@/app/lib/form/interface';
-import { ButtonTheme } from '@/app/utils/enum';
+import { Button } from '../button/index';
+import { useSearchPlane } from '@/lib/searchPlane/hook';
+import { useUserStore } from '@/lib/user/store';
+import { FormValidateState } from '@/lib/form/interface';
+import { ButtonTheme } from '@/utils/enum';
 
 export default function Form() {
   const { searchPlane } = useSearchPlane();

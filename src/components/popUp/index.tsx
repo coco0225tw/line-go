@@ -1,11 +1,11 @@
 import { PopUpWrapper, SuccessPopUpWrapper, ErrorPopUpWrapper } from './style';
 import { Button } from '../button';
 import Image from 'next/image';
-import checkImg from './../../../../public/check-circle.svg';
-import { usePopUpStore } from '@/app/lib/popUp/store';
-import { ShowPopUpType } from '@/app/utils/enum';
-import { useUserStore } from '@/app/lib/user/store';
-import { ButtonTheme } from '@/app/utils/enum';
+import checkImg from './../../../public/check-circle.svg';
+import { usePopUpStore } from '@/lib/popUp/store';
+import { ShowPopUpType } from '@/utils/enum';
+import { useUserStore } from '@/lib/user/store';
+import { ButtonTheme } from '@/utils/enum';
 export default function PopUp() {
   const { popUpType, isVisible } = usePopUpStore();
   const isErrorPopUpVisible = popUpType === ShowPopUpType.ERROR;

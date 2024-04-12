@@ -1,7 +1,7 @@
 import styled, { css } from 'styled-components';
-import { ButtonTheme1 } from './index';
+import { ButtonTheme } from '../../utils/enum';
 interface ButtonWrapperProps {
-  theme: ButtonTheme1;
+  theme: ButtonTheme;
 }
 export const ButtonWrapper = styled.div<ButtonWrapperProps>`
   height: 40px;
@@ -16,14 +16,14 @@ export const ButtonWrapper = styled.div<ButtonWrapperProps>`
     margin-top: 10px;
   }
   ${(props) =>
-    props.theme === ButtonTheme1.Dark &&
+    props.theme === ButtonTheme.Dark &&
     css`
       background-color: #4b5c6b;
       color: #fff;
     `}
 
   ${(props) =>
-    props.theme === ButtonTheme1.Light &&
+    props.theme === ButtonTheme.Light &&
     css`
       background-color: #fff;
       color: #4b5c6b;
