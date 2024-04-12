@@ -4,6 +4,7 @@ import { FormWrapper } from './style';
 import { Button, ButtonTheme1 } from './../button/index';
 import { useSearchPlane } from '@/app/lib/searchPlane/hook';
 import { useUserStore } from '@/app/lib/user/store';
+import { FormValidateState } from '@/app/lib/form/interface';
 
 export default function Form() {
   const { searchPlane } = useSearchPlane();
@@ -14,7 +15,7 @@ export default function Form() {
   const phoneNumberRef = useRef<HTMLDivElement>(null);
   const idRef = useRef<HTMLDivElement>(null);
 
-  const [formValidate, setFormValidate] = useState({
+  const [formValidate, setFormValidate] = useState<FormValidateState>({
     airlineId: true,
     name: true,
     phoneNumber: true,
@@ -26,43 +27,46 @@ export default function Form() {
   const idRegex = new RegExp('^[A-Z\\d]+$');
 
   const action = () => {
-    if (checkForm()) {
+    const result = validatedResult();
+    if (isFormValidated(result)) {
       const userAirline = airlineIdRef?.current?.textContent;
+      setUserPlane(userAirline as string);
       searchPlane(userAirline as string);
+    } else {
+      setFormValidate(result);
     }
   };
-  const checkForm = () => {
-    const checkAirlineId = checkValue(airlineIdRef, airlineIdRegex);
-    const checkName = checkValue(nameRef, nameRegex);
-    const checkPhoneNumber = checkValue(phoneNumberRef, phoneNumberRegex);
-    const checkId = checkValue(idRef, idRegex);
-
-    setFormValidate({
-      ...formValidate,
+  const validatedResult = (): FormValidateState => {
+    const checkAirlineId = testRegex(airlineIdRef, airlineIdRegex);
+    const checkName = testRegex(nameRef, nameRegex);
+    const checkPhoneNumber = testRegex(phoneNumberRef, phoneNumberRegex);
+    const checkId = testRegex(idRef, idRegex);
+    return {
       airlineId: checkAirlineId,
       name: checkName,
       phoneNumber: checkPhoneNumber,
       id: checkId,
-    });
-
-    const allValidated = checkAirlineId && checkName && checkPhoneNumber && checkId;
-    if (allValidated) {
-      const userAirline = airlineIdRef?.current?.textContent;
-      setUserPlane(userAirline as string);
-      return true;
-    }
-    return false;
+    };
   };
 
-  const checkValue = (inputRef: RefObject<HTMLDivElement>, regex: RegExp) => {
-    const inputValue = inputRef?.current?.textContent;
-
-    function isDefined<T>(val: T | undefined | null): val is T {
-      return val !== undefined && val !== null;
+  const isFormValidated = (result: FormValidateState) => {
+    for (const isValidated in result) {
+      if (!isValidated) {
+        return false;
+      }
     }
+    return true;
+  };
+
+  const testRegex = (inputRef: RefObject<HTMLDivElement>, regex: RegExp) => {
+    const inputValue = inputRef?.current?.textContent;
     if (isDefined(inputValue)) return regex.test(inputValue);
     return false;
   };
+
+  function isDefined<T>(val: T | undefined | null): val is T {
+    return val !== undefined && val !== null;
+  }
 
   const preventNextLine = (event: React.KeyboardEvent<HTMLDivElement>) => {
     if (event.key === 'Enter') {
