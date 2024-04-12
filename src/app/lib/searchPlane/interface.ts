@@ -1,6 +1,6 @@
 export interface SearchPlaneData {
   searchPlaneResponse: PlaneResponse[];
-  modifiedTime: Date;
+  modifiedTime: string;
 }
 
 export interface PlaneResponse {
@@ -28,9 +28,9 @@ export interface PlaneResponse {
 
 export interface SearchPlaneState {
   isSearchWaiting: boolean;
-  lastModifiedTime: Date;
+  lastModifiedTime: string;
   searchPlanes: PlaneResponse[];
-  setLastModifiedTime: (payload: Date) => void;
+  setLastModifiedTime: (payload: string) => void;
   setIsSearchWaiting: (payload: boolean) => void;
   setSearchPlanes: (payload: PlaneResponse[]) => void;
 }

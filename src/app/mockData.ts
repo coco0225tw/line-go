@@ -47,6 +47,6 @@ export const searchPlaneMock = new Promise<SearchPlaneData>((resolve) => {
         UpdateTime: '2024-04-11T16:56:01.261Z',
       },
     ],
-    modifiedTime: new Date('Wed, 01 Jun 2022 08:00:00 GMT'),
+    modifiedTime: 'Wed, 01 Jun 2022 08:00:00 GMT',
   });
 });

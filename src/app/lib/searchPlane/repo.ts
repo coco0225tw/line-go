@@ -7,20 +7,24 @@ export const SearchPlaneRepository = (mockData: Promise<SearchPlaneData>): Searc
 };
 
 class SearchPlaneApiUtility implements ISearchPlaneApiUtility {
-  async searchPlane(): Promise<SearchPlaneData> {
+  async searchPlane(token: string, lastModified: string): Promise<SearchPlaneData> {
     const res = await fetch(
       'https://tdx.transportdata.tw/api/basic/v2/Air/FIDS/Airport/Departure/TPE?$orderby=ScheduleDepartureTime&$format=JSON',
       {
         method: 'GET',
-        headers: { 'content-type': 'application/json', Authorization: '123', 'If-Modified-Since': '123' },
+        headers: {
+          'content-type': 'application/json',
+          //Authorization: token, //todo
+          'if-modified-since': lastModified,
+        },
       }
     );
     try {
       const result = await res.json();
-      const header = res.headers.get('Last-Modified');
+      const lastModifiedHeader = res.headers.get('last-modified');
       const data: SearchPlaneData = {
         searchPlaneResponse: result as PlaneResponse[],
-        modifiedTime: header as any as Date,
+        modifiedTime: lastModifiedHeader as string,
       };
       if (res.ok || res.status === 403) return data;
       throw new Error();
@@ -36,12 +40,12 @@ class MockSearchPlaneApiUtility implements ISearchPlaneApiUtility {
   constructor(mockData: Promise<SearchPlaneData>) {
     this.mockData = mockData;
   }
-  async searchPlane(): Promise<SearchPlaneData> {
+  async searchPlane(token: string, lastModified: string): Promise<SearchPlaneData> {
     await delay(2500);
     return this.mockData;
   }
 }
 
 interface ISearchPlaneApiUtility {
-  searchPlane: () => Promise<SearchPlaneData>;
+  searchPlane: (token: string, lastModified: string) => Promise<SearchPlaneData>;
 }

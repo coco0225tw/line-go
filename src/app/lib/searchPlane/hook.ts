@@ -16,10 +16,8 @@ export const useSearchPlane = () => {
     searchPlaneHandler(userAirline);
   };
 
-  const compareDates = (prev: Date, now: Date) => {
-    let prevDate = new Date(prev).getTime();
-    let nowDate = new Date(now).getTime();
-    return prevDate === nowDate;
+  const compareDates = (prev: string, now: string) => {
+    return prev === now;
   };
 
   const findPlaneAndShowPopup = (planeData: PlaneResponse[], userAirline: string) => {
@@ -32,8 +30,9 @@ export const useSearchPlane = () => {
   };
 
   const searchPlaneHandler = (userAirline: string) => {
+    const token = '123'; //todo
     searchPlaneRepo
-      .searchPlane()
+      .searchPlane(token, lastModifiedTime)
       .then((data) => {
         setIsSearchWaiting(false);
         const { searchPlaneResponse, modifiedTime } = data;
