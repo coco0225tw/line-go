@@ -29,12 +29,11 @@ export default function Form() {
 
   const action = () => {
     const result = validatedResult();
+    setFormValidate(result);
     if (isFormValidated(result)) {
       const userAirline = airlineIdRef?.current?.textContent;
       setUserPlane(userAirline as string);
       searchPlane(userAirline as string);
-    } else {
-      setFormValidate(result);
     }
   };
   const validatedResult = (): FormValidateState => {
@@ -51,12 +50,9 @@ export default function Form() {
   };
 
   const isFormValidated = (result: FormValidateState) => {
-    for (const isValidated in result) {
-      if (!isValidated) {
-        return false;
-      }
-    }
-    return true;
+    const values: boolean[] = Object.values(result);
+    const allValidated = !values.includes(false);
+    return allValidated;
   };
 
   const testRegex = (inputRef: RefObject<HTMLDivElement>, regex: RegExp) => {
