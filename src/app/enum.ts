@@ -7,3 +7,7 @@ export enum ClosePopUpType {
   NONE = 'NONE',
 }
 export type PopUpType = ShowPopUpType | ClosePopUpType;
+export enum ButtonTheme {
+  Dark = 'DARK',
+  Light = 'LIGHt',
+}

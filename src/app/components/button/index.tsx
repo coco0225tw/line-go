@@ -1,10 +1,6 @@
 import { ButtonWrapper } from './style';
-
-export enum ButtonTheme1 {
-  Dark = 'DARK',
-  Light = 'LIGHt',
-} //todo
-export function Button({ message, submitFun, theme }: { message: string; submitFun: () => void; theme: ButtonTheme1 }) {
+import { ButtonTheme } from '@/app/enum';
+export function Button({ message, submitFun, theme }: { message: string; submitFun: () => void; theme: ButtonTheme }) {
   return (
     <ButtonWrapper theme={theme} onClick={submitFun}>
       {message}

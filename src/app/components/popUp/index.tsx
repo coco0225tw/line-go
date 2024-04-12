@@ -1,11 +1,11 @@
 import { PopUpWrapper, SuccessPopUpWrapper, ErrorPopUpWrapper } from './style';
-import { Button, ButtonTheme1 } from '../button';
+import { Button } from '../button';
 import Image from 'next/image';
 import checkImg from './../../../../public/check-circle.svg';
 import { usePopUpStore } from '@/app/lib/popUp/store';
 import { ShowPopUpType } from '@/app/enum';
 import { useUserStore } from '@/app/lib/user/store';
-
+import { ButtonTheme } from '@/app/enum';
 export default function PopUp() {
   const { popUpType, isVisible } = usePopUpStore();
   const isErrorPopUpVisible = popUpType === ShowPopUpType.ERROR;
@@ -34,13 +34,13 @@ function ErrorPopup() {
       <div className="title">{`查不到「${userPlane}」的航班資訊`}</div>
       <div className="message">請確認航班資訊、起飛時間等，你也可以填寫此航班作為機場接送資訊。</div>
       <Button
-        theme={ButtonTheme1.Dark}
+        theme={ButtonTheme.Dark}
         message="確認航班資訊，並送出"
         submitFun={() => {
           showPopUp(ShowPopUpType.SUCCESS);
         }}
       />
-      <Button theme={ButtonTheme1.Light} message="重新填寫" submitFun={closePopUp} />
+      <Button theme={ButtonTheme.Light} message="重新填寫" submitFun={closePopUp} />
     </ErrorPopUpWrapper>
   );
 }

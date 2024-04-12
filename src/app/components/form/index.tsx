@@ -1,10 +1,11 @@
 'use client';
 import { useRef, useState, RefObject } from 'react';
 import { FormWrapper } from './style';
-import { Button, ButtonTheme1 } from './../button/index';
+import { Button } from './../button/index';
 import { useSearchPlane } from '@/app/lib/searchPlane/hook';
 import { useUserStore } from '@/app/lib/user/store';
 import { FormValidateState } from '@/app/lib/form/interface';
+import { ButtonTheme } from '@/app/enum';
 
 export default function Form() {
   const { searchPlane } = useSearchPlane();
@@ -117,7 +118,7 @@ export default function Form() {
       />
       <div className="form_item">乘車備註</div>
       <div contentEditable id="remark" />
-      <Button theme={ButtonTheme1.Dark} message="下一步" submitFun={action} />
+      <Button theme={ButtonTheme.Dark} message="下一步" submitFun={action} />
     </FormWrapper>
   );
 }
