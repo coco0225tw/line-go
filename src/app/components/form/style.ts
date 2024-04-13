@@ -5,7 +5,15 @@ export const FormWrapper = styled.div`
   top: 50%;
   left: 50%;
   transform: translate(-50%, -50%);
+
+  @media screen and (max-width: 380px) {
+    top: 0%;
+    left: 0%;
+    transform: translate(0%, 0%);
+    width: 380px;
+  }
   position: absolute;
+
   display: flex;
   flex-direction: column;
   max-width: 720px;
@@ -17,7 +25,7 @@ export const FormWrapper = styled.div`
   #remark {
     flex-grow: 1;
     margin-bottom: 20px;
-    min-height: 0;
+    height: 0px;
     white-space: wrap;
     -webkit-appearance: textarea;
   }

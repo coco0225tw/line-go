@@ -5,9 +5,12 @@ interface PopUpWrapperProps {
 export const PopUpWrapper = styled.div<PopUpWrapperProps>`
   width: 100%;
   height: 100%;
+
   background-color: rgba(0, 0, 0, 0.6);
-  top: 0;
-  position: relative;
+  bottom: 0;
+  position: fixed;
+  pointer-events: none;
+  min-width: inherit;
   display: ${(props) => (props.$isVisible ? 'block' : 'none')};
 `;
 
@@ -20,6 +23,7 @@ const ContentWrapper = styled.div`
   flex-direction: column;
   align-items: center;
   padding: 20px 40px;
+  pointer-events: fill;
 `;
 
 export const SuccessPopUpWrapper = styled(ContentWrapper)`
