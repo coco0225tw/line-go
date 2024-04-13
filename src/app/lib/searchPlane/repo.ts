@@ -19,15 +19,14 @@ class SearchPlaneApiUtility implements ISearchPlaneApiUtility {
       }
     );
     try {
+      if (res.status === 304) throw new Error('304');
+
       const result = await res.json();
       const lastModifiedHeader = res.headers.get('last-modified');
       const data: SearchPlaneData = {
         searchPlaneResponse: result as PlaneResponse[],
         modifiedTime: lastModifiedHeader as string,
       };
-
-      if (res.status === 304) throw new Error('304');
-
       return data;
     } catch (err: any) {
       throw err;
