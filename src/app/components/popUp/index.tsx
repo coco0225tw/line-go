@@ -7,7 +7,7 @@ import { ShowPopUpType } from '@/app/utils/enum';
 import { useUserStore } from '@/app/lib/user/store';
 import { ButtonTheme } from '@/app/utils/enum';
 export default function PopUp() {
-  const { popUpType, isVisible } = usePopUpStore();
+  const { popUpType, isVisible } = usePopUpStore((state) => state);
   const isErrorPopUpVisible = popUpType === ShowPopUpType.ERROR;
   const isSuccessPopUpVisible = popUpType === ShowPopUpType.SUCCESS;
   return (
@@ -27,8 +27,8 @@ function SuccessPopup() {
 }
 
 function ErrorPopup() {
-  const { closePopUp, showPopUp } = usePopUpStore();
-  const { userPlane } = useUserStore();
+  const { closePopUp, showPopUp } = usePopUpStore((state) => state);
+  const { userPlane } = useUserStore((state) => state);
   return (
     <ErrorPopUpWrapper>
       <div className="title">{`查不到「${userPlane}」的航班資訊`}</div>

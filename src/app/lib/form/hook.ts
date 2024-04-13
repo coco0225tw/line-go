@@ -1,23 +1,15 @@
 import { isDefined } from '@/app/utils/utils';
-import { RefObject, useState } from 'react';
+import { RefObject } from 'react';
 import { useFormStore } from './store';
 import { DynamicFormValidate, FormValidate } from './interface';
 
 export const useForm = () => {
-  const { setValidateValue, form } = useFormStore();
+  const { setValidateValue, form } = useFormStore((state) => state);
   const airlineIdRegex = new RegExp('^[A-Za-z\\d]+$');
   const nameRegex = new RegExp('^[a-zA-Z\\s]*[a-zA-Z]+[a-zA-Z\\s]*$');
   const phoneNumberRegex = new RegExp('^[\\d]+$');
   const idRegex = new RegExp('^[A-Z\\d]+$');
 
-  //   const [formValidate, setFormValidate] = useState<FormValidateState>({
-  //     airport: true,
-  //     airlineId: true,
-  //     name: true,
-  //     phoneNumber: true,
-  //     id: true,
-  //     remark: true,
-  //   });
   const isFormValidated = (result: DynamicFormValidate) => {
     const values: boolean[] = Object.values(result);
     const allValidated = !values.includes(false);

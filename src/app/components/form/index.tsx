@@ -46,7 +46,7 @@ function InputBox({ props }: { props: InputProps }) {
 }
 
 function ButtonBox({ refs }: { refs: Refs }) {
-  const setUserPlane = useUserStore((state) => state.setUserPlane);
+  const { setUserPlane } = useUserStore((state) => state);
   const { validatedResult, isFormValidated } = useForm();
   const { searchPlane } = useSearchPlane();
   const action = () => {

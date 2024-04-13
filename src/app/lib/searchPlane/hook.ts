@@ -5,7 +5,7 @@ import { usePopUpStore } from '../popUp/store';
 import { ShowPopUpType } from '@/app/utils/enum';
 
 export const useSearchPlane = () => {
-  const { showPopUp } = usePopUpStore();
+  const { showPopUp } = usePopUpStore((state) => state);
 
   const { isSearchWaiting, setIsSearchWaiting, lastModifiedTime, setSearchPlanes, setLastModifiedTime, searchPlanes } =
     useSearchPlaneStore();
