@@ -6,6 +6,7 @@ import { useUserStore } from '@/app/lib/user/store';
 import { ButtonTheme } from '@/app/utils/enum';
 import { useForm } from '@/app/lib/form/hook';
 import { useFormStore } from '@/app/lib/form/store';
+import { useSearchPlaneStore } from '@/app/lib/searchPlane/store';
 interface InputProps {
   contentEditable: boolean;
   ref?: React.RefObject<HTMLDivElement>;
@@ -22,6 +23,7 @@ interface Refs {
 
 function InputBox({ props }: { props: InputProps }) {
   const { form } = useFormStore((state) => state);
+  const { isSearchWaiting } = useSearchPlaneStore((state) => state);
   type Key = keyof typeof form;
   const preventNextLine = (event: React.KeyboardEvent<HTMLDivElement>) => {
     if (event.key === 'Enter') {
@@ -32,7 +34,7 @@ function InputBox({ props }: { props: InputProps }) {
   const isError = !form[id as Key];
   return (
     <Input
-      contentEditable={contentEditable}
+      contentEditable={contentEditable && !isSearchWaiting}
       ref={ref}
       className={`input ${isError && 'error'}`}
       id={id}
