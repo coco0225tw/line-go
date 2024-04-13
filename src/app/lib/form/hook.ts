@@ -14,8 +14,8 @@ export const useForm = () => {
     phoneNumber: true,
     id: true,
   });
-  const isFormValidated = () => {
-    const values: boolean[] = Object.values(formValidate);
+  const isFormValidated = (result: FormValidateState) => {
+    const values: boolean[] = Object.values(result);
     const allValidated = !values.includes(false);
     return allValidated;
   };
@@ -31,18 +31,19 @@ export const useForm = () => {
     nameRef: RefObject<HTMLDivElement>;
     phoneNumberRegex: RefObject<HTMLDivElement>;
     idRef: RefObject<HTMLDivElement>;
-  }) => {
+  }): FormValidateState => {
     const checkAirlineId = testRegex(refs.airlineIdRef, airlineIdRegex);
     const checkName = testRegex(refs.nameRef, nameRegex);
     const checkPhoneNumber = testRegex(refs.phoneNumberRegex, phoneNumberRegex);
     const checkId = testRegex(refs.idRef, idRegex);
-
-    setFormValidate({
+    const result = {
       airlineId: checkAirlineId,
       name: checkName,
       phoneNumber: checkPhoneNumber,
       id: checkId,
-    });
+    };
+    setFormValidate(result);
+    return result;
   };
 
   return { setFormValidate, validatedResult, isFormValidated, formValidate };

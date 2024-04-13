@@ -5,6 +5,8 @@ import { useSearchPlane } from '@/app/lib/searchPlane/hook';
 import { useUserStore } from '@/app/lib/user/store';
 import { ButtonTheme } from '@/app/utils/enum';
 import { useForm } from '@/app/lib/form/hook';
+import { useFormStatus } from 'react-dom';
+import { useSearchPlaneStore } from '@/app/lib/searchPlane/store';
 interface InputProps {
   contentEditable: boolean;
   ref?: React.RefObject<HTMLDivElement>;
@@ -50,8 +52,8 @@ export default function Form() {
   const refs = { airlineIdRef: airlineIdRef, nameRef: nameRef, phoneNumberRegex: phoneNumberRef, idRef: idRef };
 
   const action = () => {
-    validatedResult(refs);
-    if (isFormValidated()) {
+    const result = validatedResult(refs);
+    if (isFormValidated(result)) {
       const userAirline = airlineIdRef?.current?.textContent;
       setUserPlane(userAirline as string);
       searchPlane(userAirline as string);
