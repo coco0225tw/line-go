@@ -7,6 +7,6 @@ export const usePopUpStore = create<PopUpState>((set, get) => ({
   isVisible: () => {
     return get().popUpType !== ClosePopUpType.NONE;
   },
-  showPopUp: (type) => set({ popUpType: type }),
+  showPopUp: (payload) => set({ popUpType: payload }),
   closePopUp: () => set({ popUpType: ClosePopUpType.NONE }),
 }));
