@@ -25,9 +25,11 @@ class SearchPlaneApiUtility implements ISearchPlaneApiUtility {
         searchPlaneResponse: result as PlaneResponse[],
         modifiedTime: lastModifiedHeader as string,
       };
-      if (res.ok || res.status === 403) return data;
-      throw new Error();
-    } catch (err) {
+
+      if (res.status === 304) throw new Error('304');
+
+      return data;
+    } catch (err: any) {
       throw err;
     }
   }

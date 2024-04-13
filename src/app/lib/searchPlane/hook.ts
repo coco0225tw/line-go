@@ -16,10 +16,6 @@ export const useSearchPlane = () => {
     searchPlaneHandler(userAirline);
   };
 
-  const compareDates = (prev: string, now: string) => {
-    return prev === now;
-  };
-
   const findPlaneAndShowPopup = (planeData: PlaneResponse[], userAirline: string) => {
     const isUserPlaneExist =
       planeData.findIndex((plane: PlaneResponse) => plane.AirlineID + plane.FlightNumber === userAirline) >= 0;
@@ -35,16 +31,14 @@ export const useSearchPlane = () => {
       .then((data) => {
         setIsSearchWaiting(false);
         const { searchPlaneResponse, modifiedTime } = data;
-        const isSameDate = compareDates(lastModifiedTime, modifiedTime);
-        if (!isSameDate) {
-          findPlaneAndShowPopup(searchPlaneResponse, userAirline);
-          setSearchPlanes(searchPlaneResponse);
-          setLastModifiedTime(modifiedTime);
-        } else {
+        findPlaneAndShowPopup(searchPlaneResponse, userAirline);
+        setSearchPlanes(searchPlaneResponse);
+        setLastModifiedTime(modifiedTime);
+      })
+      .catch((err: Error) => {
+        if (err.message === '304') {
           findPlaneAndShowPopup(searchPlanes, userAirline);
         }
-      })
-      .catch((err) => {
         setIsSearchWaiting(false);
       });
   };
